@@ -6,6 +6,7 @@ import { trigger, state, animate, transition, style, keyframes } from '@angular/
 @Component({
   selector: 'mt-shopping-cart',
   templateUrl: './shopping-cart.component.html',
+  //preserveWhitespaces: true,  foi declarado em main.ts para ser validade global
   animations: [
     trigger('row', [
       state('ready', style({ opacity: 1 })),
