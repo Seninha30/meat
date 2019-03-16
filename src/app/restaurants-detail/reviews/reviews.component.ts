@@ -2,7 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from 'app/restaurants/restaurant.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'mt-reviews',

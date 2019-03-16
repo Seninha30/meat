@@ -1,10 +1,9 @@
 import { User } from './user.model';
 import { MEAT_API } from './../../app.api';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/filter';
+import { tap, filter} from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
 
 @Injectable()
@@ -15,13 +14,13 @@ export class LoginService {
 
     constructor(private http: HttpClient,
         private route: Router) {
-        this.route.events.filter(e => e instanceof NavigationEnd)
+        this.route.events.pipe(filter(e => e instanceof NavigationEnd))
             .subscribe((e: NavigationEnd) => this.lastUrl = e.url)/*pega a ultima url acessada*/
     }
 
     login(email: string, password: string): Observable<User> {
         return this.http.post<User>(`${MEAT_API}/login`, { email: email, password: password })
-            .do(x => this.user = x);
+        .pipe(tap(x => this.user = x));
     }
 
     logout() {
